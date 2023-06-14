@@ -1,0 +1,11 @@
+.form-wrapper{
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.form-wrapper form{
+    position: absolute;
+    top : 50px;
+    width: 50%;
+}

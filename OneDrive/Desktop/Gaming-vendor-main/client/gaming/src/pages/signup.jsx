@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useNavigate} from 'react-router-dom';
 import useFetch from '../hooks/useFetch';
+import './signup.css';
 
 const Signup = () => {
   console.log("hii")
@@ -29,7 +30,9 @@ const Signup = () => {
     const config = { url: `/auth/register`, method: "post", data: formData };
     try{
     const response = await fetchData(config);
-    const {userId} = response.userId._id;
+    console.log(response);
+    const {userId} = response.userId;
+    console.log(userId);
     localStorage.setItem('userid',userId);
     navigate('/otpverify');
     }

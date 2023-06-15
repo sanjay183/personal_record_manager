@@ -8,6 +8,8 @@ const otpGenerator = require('otp-generator')
 const transporter = nodemailer.createTransport({
   // host: "smtp-mail.outlook.com",
   // port: 587,
+  host : 'smtp.gmail.com',
+  port : 465,
   auth: {
       user: process.env.AUTH_EMAIL,
       pass: process.env.AUTH_PASS
@@ -62,7 +64,7 @@ exports.signup = async (req, res) => {
 
     const createuser =await User.create({ firstName,lastName, dob,password: hashedPassword ,email,phoneNumber,address , gender})
 
-    // const data = await sendVerificationEmail(createuser,res);
+    await sendVerificationEmail(createuser,res);
 
     res.status(200).send({userId:createuser._id , msg:"Registration Successful"})
 
@@ -102,7 +104,7 @@ exports.verifyOtp = async(req,res) =>{
        const {otp ,val} = req.body;
        const otpvalue = await userOTPVerification.findOne({userId : val});
        const result = await bcrypt.compare(otp , otpvalue.otp);
-    // const userid = req.body.userid;
+    // // const userid = req.body.userid;
     // const otpvalue =  await userOTPVerification.findOne({userId:userid});
     // const result  = await bcrypt.compare(otp,otpvalue.otp);
     // if (result){
